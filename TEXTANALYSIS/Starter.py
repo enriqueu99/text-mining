@@ -1,5 +1,6 @@
 #Importing praw (REDDIT API)
 #Importing request module to interact with Reddit database
+from importlib.metadata import distribution
 import nltk
 import praw 
 import requests
@@ -29,8 +30,9 @@ user_agent=user_agent
 if __name__ == "__main__":
 
     def main():
-        #sentiment analysis module
+        #sentiment analysis module/ Vader Lexicon
         nltk.download('vader_lexicon')
+        #Sentinment intensity analyzer import from nltk 
         from nltk.sentiment.vader import SentimentIntensityAnalyzer as SIA
         headlines = set()
         sia = SIA()
@@ -59,6 +61,7 @@ if __name__ == "__main__":
             #appending the pol-scores to 'results'
             results.append(pol_score)
         
+
         print(results[:])
         df = pd.DataFrame.from_records(results)
         df.head()
@@ -74,7 +77,7 @@ if __name__ == "__main__":
         #acquires percentages of value distributions
         #metric we wanted for aggregate sentiment analysis
         print(df.label.value_counts(normalize=True) *100)
-        return df.label.value_counts(normalize=True) *100
+        return df.label.value_counts(normalize=True) *100 
     #calling Function
     
     main()
