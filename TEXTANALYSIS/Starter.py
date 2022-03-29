@@ -3,43 +3,48 @@
 
 import praw 
 import requests
-
+import json
+#Client ID and Key needed for API communication
 CLIENT_ID = 'CnNahd6wkmKVY5l5vUAvgQ'
 SECRET_KEY = 'yammVtkX61Y4Kf-QV3DrKNbqyb45Ow'
 
 
-#Reddit API objects
+#"Reddit instance" is created
 user_agent = 'Scraper 1.0 by /u/TerribleCherry2392'
 reddit = praw.Reddit(client_id=CLIENT_ID,client_secret=SECRET_KEY,
 user_agent=user_agent
 
 )
+infor = set()
+infor2 = set()
+infor3 = set()
+usernames= set()
 
 
 def main():
 
     for submission in reddit.subreddit('wallstreetbets').hot(limit=None):
-        
-        infor=list()
-        
-        print(submission.title)
-        print(submission.id)
-        print(submission.author)
-
-        infor.add(submission.title)
-        infor.add(submission.id)
     
-    print(len(infor))
+        infor3.add(submission.title)
+        
+    print(len(infor3))
+    
+    
+    for i in usernames:
+         requests.get(r'http://www.reddit.com/user/[username]/comments/.json')
 
-infor = list()
-
-
+    
+    
 
 
 
 if __name__ == "__main__":
- 
-    print(len(infor))
+    
+    main()
+    
+    print(len(infor3))
+
+    print(infor3)
  
 
 
