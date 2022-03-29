@@ -29,7 +29,7 @@ def main():
     
     for submission in reddit.subreddit('wallstreetbets').hot(limit=None):
         headlines.add(submission.title)
-        
+    #use to check if the data is being recorded into the set    
     print(len(headlines))
     
     df = pd.DataFrame(headlines)
@@ -42,17 +42,21 @@ def main():
 
 #creating the object for the CSV file where the data is stored
 
-def filter(f):
+def filter():
     counter =0
-    keywordlist = ['GME','gme','Gme','AMC','amc']
-    
-    with open('headlines.csv', 'rt') as f:
-     reader = csv.reader(f, delimiter=',') 
-     for row in reader:
-          for field in row:
-              if field == any(keywordlist):
-                  counter = counter +1
+    keyword = 'Short Opportunity'
+    with open('headlines.csv',encoding='utf-8') as f:
+        for line in csv.reader(f):
+          if keyword in line == True:
+              counter =counter +1
 
+          
+          print(line) 
+           
+           #if keyword in map(str.lower, line):
+              #counter += 1
+    
+    print(counter)
     return counter
 
 
